@@ -1,0 +1,1685 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{titanic\_second\_try}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} 정답 저장!}
+        \PY{n}{y} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsection{데이터 전처리}\label{uxb370uxc774uxd130-uxc804uxcc98uxb9ac}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} 트레이닝, 테스트 데이터 \PYZgt{}\PYZgt{}성별\PYZlt{}\PYZlt{} 이진화, female = 1, female = 0}
+        \PY{n}{embarked\PYZus{}mapping} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{embarked\PYZus{}mapping}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{embarked\PYZus{}mapping}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} embarked null값 그냥 S로 채운 후 S, C, Q값 숫자로 바꿔주기}
+        \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Embarked}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Embarked}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{embarked\PYZus{}mapping} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{\PYZcb{}}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Embarked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Embarked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{embarked\PYZus{}mapping}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Embarked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Embarked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{embarked\PYZus{}mapping}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 이름 길이(Name\PYZus{}length) 추가하기}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n+nb}{len}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} fare 매핑}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{7.91}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mf}{7.91}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{14.454}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mf}{14.454}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{31}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{31}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{7.91}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mf}{7.91}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{14.454}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mf}{14.454}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{31}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{31}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}age 매핑}
+        \PY{n}{age\PYZus{}avg} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{age\PYZus{}avg}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{age\PYZus{}avg}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{16}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{32}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{32}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{48}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{16}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{32}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{32}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{48}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{48}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} 없앨 feature들,,}
+        \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cabin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cabin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ticket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ticket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}      PassengerId  Survived  Pclass  Sex  Age  SibSp  Parch  Fare  Embarked  \textbackslash{}
+        0              1         0       3    0    1      1      0     0         1   
+        1              2         1       1    1    2      1      0     3         2   
+        2              3         1       3    1    1      0      0     1         1   
+        3              4         1       1    1    2      1      0     3         1   
+        4              5         0       3    0    2      0      0     1         1   
+        5              6         0       3    0    1      0      0     1         3   
+        6              7         0       1    0    3      0      0     3         1   
+        7              8         0       3    0    0      3      1     2         1   
+        8              9         1       3    1    1      0      2     1         1   
+        9             10         1       2    1    0      1      0     2         2   
+        10            11         1       3    1    0      1      1     2         1   
+        11            12         1       1    1    3      0      0     2         1   
+        12            13         0       3    0    1      0      0     1         1   
+        13            14         0       3    0    2      1      5     3         1   
+        14            15         0       3    1    0      0      0     0         1   
+        15            16         1       2    1    3      0      0     2         1   
+        16            17         0       3    0    0      4      1     2         3   
+        17            18         1       2    0    1      0      0     1         1   
+        18            19         0       3    1    1      1      0     2         1   
+        19            20         1       3    1    1      0      0     0         2   
+        20            21         0       2    0    2      0      0     2         1   
+        21            22         1       2    0    2      0      0     1         1   
+        22            23         1       3    1    0      0      0     1         3   
+        23            24         1       1    0    1      0      0     3         1   
+        24            25         0       3    1    0      3      1     2         1   
+        25            26         1       3    1    2      1      5     3         1   
+        26            27         0       3    0    1      0      0     0         2   
+        27            28         0       1    0    1      3      2     3         1   
+        28            29         1       3    1    1      0      0     0         3   
+        29            30         0       3    0    1      0      0     0         1   
+        ..           {\ldots}       {\ldots}     {\ldots}  {\ldots}  {\ldots}    {\ldots}    {\ldots}   {\ldots}       {\ldots}   
+        861          862         0       2    0    1      1      0     1         1   
+        862          863         1       1    1    2      0      0     2         1   
+        863          864         0       3    1    1      8      2     3         1   
+        864          865         0       2    0    1      0      0     1         1   
+        865          866         1       2    1    2      0      0     1         1   
+        866          867         1       2    1    1      1      0     1         2   
+        867          868         0       1    0    1      0      0     3         1   
+        868          869         0       3    0    1      0      0     1         1   
+        869          870         1       3    0    0      1      1     1         1   
+        870          871         0       3    0    1      0      0     0         1   
+        871          872         1       1    1    2      1      1     3         1   
+        872          873         0       1    0    2      0      0     0         1   
+        873          874         0       3    0    2      0      0     1         1   
+        874          875         1       2    1    1      1      0     2         2   
+        875          876         1       3    1    0      0      0     0         2   
+        876          877         0       3    0    1      0      0     1         1   
+        877          878         0       3    0    1      0      0     0         1   
+        878          879         0       3    0    1      0      0     0         1   
+        879          880         1       1    1    3      0      1     3         2   
+        880          881         1       2    1    1      0      1     2         1   
+        881          882         0       3    0    2      0      0     0         1   
+        882          883         0       3    1    1      0      0     1         1   
+        883          884         0       2    0    1      0      0     1         1   
+        884          885         0       3    0    1      0      0     0         1   
+        885          886         0       3    1    2      0      5     2         3   
+        886          887         0       2    0    1      0      0     1         1   
+        887          888         1       1    1    1      0      0     2         1   
+        888          889         0       3    1    1      1      2     2         1   
+        889          890         1       1    0    1      0      0     2         2   
+        890          891         0       3    0    1      0      0     0         3   
+        
+             Name\_length  
+        0             23  
+        1             51  
+        2             22  
+        3             44  
+        4             24  
+        5             16  
+        6             23  
+        7             30  
+        8             49  
+        9             35  
+        10            31  
+        11            24  
+        12            30  
+        13            27  
+        14            36  
+        15            32  
+        16            20  
+        17            28  
+        18            55  
+        19            23  
+        20            20  
+        21            21  
+        22            27  
+        23            28  
+        24            29  
+        25            57  
+        26            23  
+        27            30  
+        28            29  
+        29            19  
+        ..           {\ldots}  
+        861           27  
+        862           51  
+        863           33  
+        864           22  
+        865           24  
+        866           28  
+        867           36  
+        868           27  
+        869           31  
+        870           17  
+        871           48  
+        872           24  
+        873           27  
+        874           37  
+        875           32  
+        876           29  
+        877           20  
+        878           18  
+        879           45  
+        880           44  
+        881           18  
+        882           28  
+        883           29  
+        884           22  
+        885           36  
+        886           21  
+        887           28  
+        888           40  
+        889           21  
+        890           19  
+        
+        [891 rows x 10 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} w, x값 받아서 방정식값 출력}
+        \PY{k}{def} \PY{n+nf}{lin\PYZus{}val}\PY{p}{(}\PY{n}{x\PYZus{}arr}\PY{p}{)}\PY{p}{:}
+            \PY{n}{temparr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{x\PYZus{}arr}\PY{p}{:}
+                \PY{n}{temparr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+            \PY{n}{linalg} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asmatrix}\PY{p}{(}\PY{p}{[}\PY{n}{w\PYZus{}arr}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{asmatrix}\PY{p}{(}\PY{n}{temparr}\PY{p}{)}
+            \PY{n}{result} \PY{o}{=} \PY{n}{linalg}\PY{o}{.}\PY{n}{A}
+            \PY{k}{return} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \section{일단 w0, w1, w2, w3만 사용, 더쓸거면
+추가!!}\label{uxc77cuxb2e8-w0-w1-w2-w3uxb9cc-uxc0acuxc6a9-uxb354uxc4f8uxac70uxba74-uxcd94uxac00}
+
+\subsection{sex, age, fare}\label{sex-age-fare}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{w\PYZus{}arr} \PY{o}{=} \PY{p}{[}\PY{p}{]}    \PY{c+c1}{\PYZsh{} w값들을 배열에 저장해서 사용할 겁니다.}
+        \PY{c+c1}{\PYZsh{} 일단은 w 두개!}
+        \PY{n}{w\PYZus{}arr}\PY{o}{=}\PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+        
+        \PY{n}{x\PYZus{}arr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n}{x\PYZus{}arr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{w\PYZus{}arr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} [0.9932030253130791, 0.855399645349603]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} sigmoid func}
+        \PY{k}{def} \PY{n+nf}{sigmoid}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} predicting func}
+        \PY{k}{def} \PY{n+nf}{pred\PYZus{}probability}\PY{p}{(}\PY{n}{x\PYZus{}arr}\PY{p}{)}\PY{p}{:}
+            \PY{n}{z} \PY{o}{=} \PY{n}{lin\PYZus{}val}\PY{p}{(}\PY{n}{x\PYZus{}arr}\PY{p}{)}
+            \PY{k}{return} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} loss func}
+        \PY{k}{def} \PY{n+nf}{cost\PYZus{}func}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{n}{probability} \PY{o}{=} \PY{n}{pred\PYZus{}probability}\PY{p}{(}\PY{n}{x\PYZus{}arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{probability}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{probability}\PY{p}{)}
+            \PY{n}{total\PYZus{}cost} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n+nb}{sum}
+            \PY{k}{return} \PY{n}{total\PYZus{}cost}       
+\end{Verbatim}
+
+
+    \section{x값 추가되면
+바꿔줘야함...}\label{xuxac12-uxcd94uxac00uxb418uxba74-uxbc14uxafd4uxc918uxc57cuxd568...}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{predicted\PYZus{}right} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{train}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{probability} \PY{o}{=} \PY{n}{pred\PYZus{}probability}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{k}{if} \PY{p}{(}\PY{n}{probability} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{predicted\PYZus{}right} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{predicted\PYZus{}right} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}accuracy:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{n}{predicted\PYZus{}right}\PY{o}{/}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_accuracy: 78.67564534231201 \%
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} cost 함수 미분한것, w\PYZus{}num번째 w값에 대해 미분?}
+         \PY{k}{def} \PY{n+nf}{gradient\PYZus{}derivate}\PY{p}{(}\PY{n}{w\PYZus{}num}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{probability} \PY{o}{=} \PY{n}{pred\PYZus{}probability}\PY{p}{(}\PY{n}{x\PYZus{}arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{w\PYZus{}num} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{probability} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{probability} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{x\PYZus{}arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{w\PYZus{}num}\PY{p}{]}
+             \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n+nb}{sum}
+         
+         \PY{n}{w\PYZus{}zero\PYZus{}graph} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{w\PYZus{}one\PYZus{}graph} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} w\PYZus{}two\PYZus{}graph = []}
+         \PY{c+c1}{\PYZsh{} w\PYZus{}three\PYZus{}graph = []}
+         \PY{n}{w\PYZus{}cost} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k+kn}{import} \PY{n+nn}{time}
+         \PY{c+c1}{\PYZsh{} iteration만큼 반복}
+         \PY{k}{def} \PY{n+nf}{converge}\PY{p}{(}\PY{n}{iteration}\PY{p}{)}\PY{p}{:}
+             \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.0001}
+             \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iteration}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{temp\PYZus{}arr} \PY{o}{=} \PY{n}{w\PYZus{}arr}\PY{p}{[}\PY{p}{:}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{w\PYZus{}arr}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{w\PYZus{}arr}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{w\PYZus{}arr}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{alpha} \PY{o}{*} \PY{n}{gradient\PYZus{}derivate}\PY{p}{(}\PY{n}{j}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}             print(j, \PYZdq{}번째 w?\PYZdq{}, w\PYZus{}arr[j], \PYZdq{}||\PYZdq{}, \PYZdq{}원래:\PYZdq{}, temp\PYZus{}arr[j])}
+                     \PY{k}{if} \PY{p}{(}\PY{n}{j} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{w\PYZus{}zero\PYZus{}graph}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w\PYZus{}arr}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                     \PY{k}{elif} \PY{p}{(}\PY{n}{j} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{w\PYZus{}one\PYZus{}graph}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w\PYZus{}arr}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}             elif (j == 2):}
+         \PY{c+c1}{\PYZsh{}                 w\PYZus{}two\PYZus{}graph.append(w\PYZus{}arr[j])}
+         \PY{c+c1}{\PYZsh{}             elif (j == 3):}
+         \PY{c+c1}{\PYZsh{}                 w\PYZus{}three\PYZus{}graph.append(w\PYZus{}arr[j])}
+                     \PY{k}{if} \PY{p}{(}\PY{n}{w\PYZus{}arr}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{w\PYZus{}arr}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{break}
+                     
+                 \PY{k}{if} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{번째 학습,,,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{n}{w\PYZus{}cost}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cost\PYZus{}func}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{if} \PY{p}{(}\PY{n}{w\PYZus{}cost}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{break}
+         \PY{c+c1}{\PYZsh{}         print(\PYZdq{}cost:\PYZdq{}, w\PYZus{}cost[i])}
+         \PY{c+c1}{\PYZsh{}         print(\PYZdq{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZdq{})}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{WorkingTime: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ sec}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{w\PYZus{}zero\PYZus{}graph}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{w\PYZus{}one\PYZus{}graph}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}     plt.plot(w\PYZus{}two\PYZus{}graph, label=\PYZsq{}w2\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}     plt.plot(w\PYZus{}three\PYZus{}graph, label=\PYZsq{}w3\PYZsq{})}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{w\PYZus{}cost}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cost}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{converge}\PY{p}{(}\PY{l+m+mi}{100001}\PY{p}{)}
+         \PY{n}{predicted\PYZus{}right} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{train}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{probability} \PY{o}{=} \PY{n}{pred\PYZus{}probability}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{k}{if} \PY{p}{(}\PY{n}{probability} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{predicted\PYZus{}right} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{predicted\PYZus{}right} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}accuracy:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{n}{predicted\PYZus{}right}\PY{o}{/}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0 번째 학습,,,
+100 번째 학습,,,
+200 번째 학습,,,
+300 번째 학습,,,
+400 번째 학습,,,
+500 번째 학습,,,
+600 번째 학습,,,
+700 번째 학습,,,
+800 번째 학습,,,
+900 번째 학습,,,
+1000 번째 학습,,,
+1100 번째 학습,,,
+1200 번째 학습,,,
+1300 번째 학습,,,
+1400 번째 학습,,,
+1500 번째 학습,,,
+1600 번째 학습,,,
+1700 번째 학습,,,
+1800 번째 학습,,,
+1900 번째 학습,,,
+2000 번째 학습,,,
+2100 번째 학습,,,
+2200 번째 학습,,,
+2300 번째 학습,,,
+2400 번째 학습,,,
+2500 번째 학습,,,
+2600 번째 학습,,,
+2700 번째 학습,,,
+2800 번째 학습,,,
+2900 번째 학습,,,
+3000 번째 학습,,,
+3100 번째 학습,,,
+3200 번째 학습,,,
+3300 번째 학습,,,
+3400 번째 학습,,,
+3500 번째 학습,,,
+3600 번째 학습,,,
+3700 번째 학습,,,
+3800 번째 학습,,,
+3900 번째 학습,,,
+4000 번째 학습,,,
+4100 번째 학습,,,
+4200 번째 학습,,,
+4300 번째 학습,,,
+4400 번째 학습,,,
+4500 번째 학습,,,
+4600 번째 학습,,,
+4700 번째 학습,,,
+4800 번째 학습,,,
+4900 번째 학습,,,
+5000 번째 학습,,,
+5100 번째 학습,,,
+5200 번째 학습,,,
+5300 번째 학습,,,
+5400 번째 학습,,,
+5500 번째 학습,,,
+5600 번째 학습,,,
+5700 번째 학습,,,
+5800 번째 학습,,,
+5900 번째 학습,,,
+6000 번째 학습,,,
+6100 번째 학습,,,
+6200 번째 학습,,,
+6300 번째 학습,,,
+6400 번째 학습,,,
+6500 번째 학습,,,
+6600 번째 학습,,,
+6700 번째 학습,,,
+6800 번째 학습,,,
+6900 번째 학습,,,
+7000 번째 학습,,,
+7100 번째 학습,,,
+7200 번째 학습,,,
+7300 번째 학습,,,
+7400 번째 학습,,,
+7500 번째 학습,,,
+7600 번째 학습,,,
+7700 번째 학습,,,
+7800 번째 학습,,,
+7900 번째 학습,,,
+8000 번째 학습,,,
+8100 번째 학습,,,
+8200 번째 학습,,,
+8300 번째 학습,,,
+8400 번째 학습,,,
+8500 번째 학습,,,
+8600 번째 학습,,,
+8700 번째 학습,,,
+8800 번째 학습,,,
+8900 번째 학습,,,
+9000 번째 학습,,,
+9100 번째 학습,,,
+9200 번째 학습,,,
+9300 번째 학습,,,
+9400 번째 학습,,,
+9500 번째 학습,,,
+9600 번째 학습,,,
+9700 번째 학습,,,
+9800 번째 학습,,,
+9900 번째 학습,,,
+10000 번째 학습,,,
+10100 번째 학습,,,
+10200 번째 학습,,,
+10300 번째 학습,,,
+10400 번째 학습,,,
+10500 번째 학습,,,
+10600 번째 학습,,,
+10700 번째 학습,,,
+10800 번째 학습,,,
+10900 번째 학습,,,
+11000 번째 학습,,,
+11100 번째 학습,,,
+11200 번째 학습,,,
+11300 번째 학습,,,
+11400 번째 학습,,,
+11500 번째 학습,,,
+11600 번째 학습,,,
+11700 번째 학습,,,
+11800 번째 학습,,,
+11900 번째 학습,,,
+12000 번째 학습,,,
+12100 번째 학습,,,
+12200 번째 학습,,,
+12300 번째 학습,,,
+12400 번째 학습,,,
+12500 번째 학습,,,
+12600 번째 학습,,,
+12700 번째 학습,,,
+12800 번째 학습,,,
+12900 번째 학습,,,
+13000 번째 학습,,,
+13100 번째 학습,,,
+13200 번째 학습,,,
+13300 번째 학습,,,
+13400 번째 학습,,,
+13500 번째 학습,,,
+13600 번째 학습,,,
+13700 번째 학습,,,
+13800 번째 학습,,,
+13900 번째 학습,,,
+14000 번째 학습,,,
+14100 번째 학습,,,
+14200 번째 학습,,,
+14300 번째 학습,,,
+14400 번째 학습,,,
+14500 번째 학습,,,
+14600 번째 학습,,,
+14700 번째 학습,,,
+14800 번째 학습,,,
+14900 번째 학습,,,
+15000 번째 학습,,,
+15100 번째 학습,,,
+15200 번째 학습,,,
+15300 번째 학습,,,
+15400 번째 학습,,,
+15500 번째 학습,,,
+15600 번째 학습,,,
+15700 번째 학습,,,
+15800 번째 학습,,,
+15900 번째 학습,,,
+16000 번째 학습,,,
+16100 번째 학습,,,
+16200 번째 학습,,,
+16300 번째 학습,,,
+16400 번째 학습,,,
+16500 번째 학습,,,
+16600 번째 학습,,,
+16700 번째 학습,,,
+16800 번째 학습,,,
+16900 번째 학습,,,
+17000 번째 학습,,,
+17100 번째 학습,,,
+17200 번째 학습,,,
+17300 번째 학습,,,
+17400 번째 학습,,,
+17500 번째 학습,,,
+17600 번째 학습,,,
+17700 번째 학습,,,
+17800 번째 학습,,,
+17900 번째 학습,,,
+18000 번째 학습,,,
+18100 번째 학습,,,
+18200 번째 학습,,,
+18300 번째 학습,,,
+18400 번째 학습,,,
+18500 번째 학습,,,
+18600 번째 학습,,,
+18700 번째 학습,,,
+18800 번째 학습,,,
+18900 번째 학습,,,
+19000 번째 학습,,,
+19100 번째 학습,,,
+19200 번째 학습,,,
+19300 번째 학습,,,
+19400 번째 학습,,,
+19500 번째 학습,,,
+19600 번째 학습,,,
+19700 번째 학습,,,
+19800 번째 학습,,,
+19900 번째 학습,,,
+20000 번째 학습,,,
+20100 번째 학습,,,
+20200 번째 학습,,,
+20300 번째 학습,,,
+20400 번째 학습,,,
+20500 번째 학습,,,
+20600 번째 학습,,,
+20700 번째 학습,,,
+20800 번째 학습,,,
+20900 번째 학습,,,
+21000 번째 학습,,,
+21100 번째 학습,,,
+21200 번째 학습,,,
+21300 번째 학습,,,
+21400 번째 학습,,,
+21500 번째 학습,,,
+21600 번째 학습,,,
+21700 번째 학습,,,
+21800 번째 학습,,,
+21900 번째 학습,,,
+22000 번째 학습,,,
+22100 번째 학습,,,
+22200 번째 학습,,,
+22300 번째 학습,,,
+22400 번째 학습,,,
+22500 번째 학습,,,
+22600 번째 학습,,,
+22700 번째 학습,,,
+22800 번째 학습,,,
+22900 번째 학습,,,
+23000 번째 학습,,,
+23100 번째 학습,,,
+23200 번째 학습,,,
+23300 번째 학습,,,
+23400 번째 학습,,,
+23500 번째 학습,,,
+23600 번째 학습,,,
+23700 번째 학습,,,
+23800 번째 학습,,,
+23900 번째 학습,,,
+24000 번째 학습,,,
+24100 번째 학습,,,
+24200 번째 학습,,,
+24300 번째 학습,,,
+24400 번째 학습,,,
+24500 번째 학습,,,
+24600 번째 학습,,,
+24700 번째 학습,,,
+24800 번째 학습,,,
+24900 번째 학습,,,
+25000 번째 학습,,,
+25100 번째 학습,,,
+25200 번째 학습,,,
+25300 번째 학습,,,
+25400 번째 학습,,,
+25500 번째 학습,,,
+25600 번째 학습,,,
+25700 번째 학습,,,
+25800 번째 학습,,,
+25900 번째 학습,,,
+26000 번째 학습,,,
+26100 번째 학습,,,
+26200 번째 학습,,,
+26300 번째 학습,,,
+26400 번째 학습,,,
+26500 번째 학습,,,
+26600 번째 학습,,,
+26700 번째 학습,,,
+26800 번째 학습,,,
+26900 번째 학습,,,
+27000 번째 학습,,,
+27100 번째 학습,,,
+27200 번째 학습,,,
+27300 번째 학습,,,
+27400 번째 학습,,,
+27500 번째 학습,,,
+27600 번째 학습,,,
+27700 번째 학습,,,
+27800 번째 학습,,,
+27900 번째 학습,,,
+28000 번째 학습,,,
+28100 번째 학습,,,
+28200 번째 학습,,,
+28300 번째 학습,,,
+28400 번째 학습,,,
+28500 번째 학습,,,
+28600 번째 학습,,,
+28700 번째 학습,,,
+28800 번째 학습,,,
+28900 번째 학습,,,
+29000 번째 학습,,,
+29100 번째 학습,,,
+29200 번째 학습,,,
+29300 번째 학습,,,
+29400 번째 학습,,,
+29500 번째 학습,,,
+29600 번째 학습,,,
+29700 번째 학습,,,
+29800 번째 학습,,,
+29900 번째 학습,,,
+30000 번째 학습,,,
+30100 번째 학습,,,
+30200 번째 학습,,,
+30300 번째 학습,,,
+30400 번째 학습,,,
+30500 번째 학습,,,
+30600 번째 학습,,,
+30700 번째 학습,,,
+30800 번째 학습,,,
+30900 번째 학습,,,
+31000 번째 학습,,,
+31100 번째 학습,,,
+31200 번째 학습,,,
+31300 번째 학습,,,
+31400 번째 학습,,,
+31500 번째 학습,,,
+31600 번째 학습,,,
+31700 번째 학습,,,
+31800 번째 학습,,,
+31900 번째 학습,,,
+32000 번째 학습,,,
+32100 번째 학습,,,
+32200 번째 학습,,,
+32300 번째 학습,,,
+32400 번째 학습,,,
+32500 번째 학습,,,
+32600 번째 학습,,,
+32700 번째 학습,,,
+32800 번째 학습,,,
+32900 번째 학습,,,
+33000 번째 학습,,,
+33100 번째 학습,,,
+33200 번째 학습,,,
+33300 번째 학습,,,
+33400 번째 학습,,,
+33500 번째 학습,,,
+33600 번째 학습,,,
+33700 번째 학습,,,
+33800 번째 학습,,,
+33900 번째 학습,,,
+34000 번째 학습,,,
+34100 번째 학습,,,
+34200 번째 학습,,,
+34300 번째 학습,,,
+34400 번째 학습,,,
+34500 번째 학습,,,
+34600 번째 학습,,,
+34700 번째 학습,,,
+34800 번째 학습,,,
+34900 번째 학습,,,
+35000 번째 학습,,,
+35100 번째 학습,,,
+35200 번째 학습,,,
+35300 번째 학습,,,
+35400 번째 학습,,,
+35500 번째 학습,,,
+35600 번째 학습,,,
+35700 번째 학습,,,
+35800 번째 학습,,,
+35900 번째 학습,,,
+36000 번째 학습,,,
+36100 번째 학습,,,
+36200 번째 학습,,,
+36300 번째 학습,,,
+36400 번째 학습,,,
+36500 번째 학습,,,
+36600 번째 학습,,,
+36700 번째 학습,,,
+36800 번째 학습,,,
+36900 번째 학습,,,
+37000 번째 학습,,,
+37100 번째 학습,,,
+37200 번째 학습,,,
+37300 번째 학습,,,
+37400 번째 학습,,,
+37500 번째 학습,,,
+37600 번째 학습,,,
+37700 번째 학습,,,
+37800 번째 학습,,,
+37900 번째 학습,,,
+38000 번째 학습,,,
+38100 번째 학습,,,
+38200 번째 학습,,,
+38300 번째 학습,,,
+38400 번째 학습,,,
+38500 번째 학습,,,
+38600 번째 학습,,,
+38700 번째 학습,,,
+38800 번째 학습,,,
+38900 번째 학습,,,
+39000 번째 학습,,,
+39100 번째 학습,,,
+39200 번째 학습,,,
+39300 번째 학습,,,
+39400 번째 학습,,,
+39500 번째 학습,,,
+39600 번째 학습,,,
+39700 번째 학습,,,
+39800 번째 학습,,,
+39900 번째 학습,,,
+40000 번째 학습,,,
+40100 번째 학습,,,
+40200 번째 학습,,,
+40300 번째 학습,,,
+40400 번째 학습,,,
+40500 번째 학습,,,
+40600 번째 학습,,,
+40700 번째 학습,,,
+40800 번째 학습,,,
+40900 번째 학습,,,
+41000 번째 학습,,,
+41100 번째 학습,,,
+41200 번째 학습,,,
+41300 번째 학습,,,
+41400 번째 학습,,,
+41500 번째 학습,,,
+41600 번째 학습,,,
+41700 번째 학습,,,
+41800 번째 학습,,,
+41900 번째 학습,,,
+42000 번째 학습,,,
+42100 번째 학습,,,
+42200 번째 학습,,,
+42300 번째 학습,,,
+42400 번째 학습,,,
+42500 번째 학습,,,
+42600 번째 학습,,,
+42700 번째 학습,,,
+42800 번째 학습,,,
+42900 번째 학습,,,
+43000 번째 학습,,,
+43100 번째 학습,,,
+43200 번째 학습,,,
+43300 번째 학습,,,
+43400 번째 학습,,,
+43500 번째 학습,,,
+43600 번째 학습,,,
+43700 번째 학습,,,
+43800 번째 학습,,,
+43900 번째 학습,,,
+44000 번째 학습,,,
+44100 번째 학습,,,
+44200 번째 학습,,,
+44300 번째 학습,,,
+44400 번째 학습,,,
+44500 번째 학습,,,
+44600 번째 학습,,,
+44700 번째 학습,,,
+44800 번째 학습,,,
+44900 번째 학습,,,
+45000 번째 학습,,,
+45100 번째 학습,,,
+45200 번째 학습,,,
+45300 번째 학습,,,
+45400 번째 학습,,,
+45500 번째 학습,,,
+45600 번째 학습,,,
+45700 번째 학습,,,
+45800 번째 학습,,,
+45900 번째 학습,,,
+46000 번째 학습,,,
+46100 번째 학습,,,
+46200 번째 학습,,,
+46300 번째 학습,,,
+46400 번째 학습,,,
+46500 번째 학습,,,
+46600 번째 학습,,,
+46700 번째 학습,,,
+46800 번째 학습,,,
+46900 번째 학습,,,
+47000 번째 학습,,,
+47100 번째 학습,,,
+47200 번째 학습,,,
+47300 번째 학습,,,
+47400 번째 학습,,,
+47500 번째 학습,,,
+47600 번째 학습,,,
+47700 번째 학습,,,
+47800 번째 학습,,,
+47900 번째 학습,,,
+48000 번째 학습,,,
+48100 번째 학습,,,
+48200 번째 학습,,,
+48300 번째 학습,,,
+48400 번째 학습,,,
+48500 번째 학습,,,
+48600 번째 학습,,,
+48700 번째 학습,,,
+48800 번째 학습,,,
+48900 번째 학습,,,
+49000 번째 학습,,,
+49100 번째 학습,,,
+49200 번째 학습,,,
+49300 번째 학습,,,
+49400 번째 학습,,,
+49500 번째 학습,,,
+49600 번째 학습,,,
+49700 번째 학습,,,
+49800 번째 학습,,,
+49900 번째 학습,,,
+50000 번째 학습,,,
+50100 번째 학습,,,
+50200 번째 학습,,,
+50300 번째 학습,,,
+50400 번째 학습,,,
+50500 번째 학습,,,
+50600 번째 학습,,,
+50700 번째 학습,,,
+50800 번째 학습,,,
+50900 번째 학습,,,
+51000 번째 학습,,,
+51100 번째 학습,,,
+51200 번째 학습,,,
+51300 번째 학습,,,
+51400 번째 학습,,,
+51500 번째 학습,,,
+51600 번째 학습,,,
+51700 번째 학습,,,
+51800 번째 학습,,,
+51900 번째 학습,,,
+52000 번째 학습,,,
+52100 번째 학습,,,
+52200 번째 학습,,,
+52300 번째 학습,,,
+52400 번째 학습,,,
+52500 번째 학습,,,
+52600 번째 학습,,,
+52700 번째 학습,,,
+52800 번째 학습,,,
+52900 번째 학습,,,
+53000 번째 학습,,,
+53100 번째 학습,,,
+53200 번째 학습,,,
+53300 번째 학습,,,
+53400 번째 학습,,,
+53500 번째 학습,,,
+53600 번째 학습,,,
+53700 번째 학습,,,
+53800 번째 학습,,,
+53900 번째 학습,,,
+54000 번째 학습,,,
+54100 번째 학습,,,
+54200 번째 학습,,,
+54300 번째 학습,,,
+54400 번째 학습,,,
+54500 번째 학습,,,
+54600 번째 학습,,,
+54700 번째 학습,,,
+54800 번째 학습,,,
+54900 번째 학습,,,
+55000 번째 학습,,,
+55100 번째 학습,,,
+55200 번째 학습,,,
+55300 번째 학습,,,
+55400 번째 학습,,,
+55500 번째 학습,,,
+55600 번째 학습,,,
+55700 번째 학습,,,
+55800 번째 학습,,,
+55900 번째 학습,,,
+56000 번째 학습,,,
+56100 번째 학습,,,
+56200 번째 학습,,,
+56300 번째 학습,,,
+56400 번째 학습,,,
+56500 번째 학습,,,
+56600 번째 학습,,,
+56700 번째 학습,,,
+56800 번째 학습,,,
+56900 번째 학습,,,
+57000 번째 학습,,,
+57100 번째 학습,,,
+57200 번째 학습,,,
+57300 번째 학습,,,
+57400 번째 학습,,,
+57500 번째 학습,,,
+57600 번째 학습,,,
+57700 번째 학습,,,
+57800 번째 학습,,,
+57900 번째 학습,,,
+58000 번째 학습,,,
+58100 번째 학습,,,
+58200 번째 학습,,,
+58300 번째 학습,,,
+58400 번째 학습,,,
+58500 번째 학습,,,
+58600 번째 학습,,,
+58700 번째 학습,,,
+58800 번째 학습,,,
+58900 번째 학습,,,
+59000 번째 학습,,,
+59100 번째 학습,,,
+59200 번째 학습,,,
+59300 번째 학습,,,
+59400 번째 학습,,,
+59500 번째 학습,,,
+59600 번째 학습,,,
+59700 번째 학습,,,
+59800 번째 학습,,,
+59900 번째 학습,,,
+60000 번째 학습,,,
+60100 번째 학습,,,
+60200 번째 학습,,,
+60300 번째 학습,,,
+60400 번째 학습,,,
+60500 번째 학습,,,
+60600 번째 학습,,,
+60700 번째 학습,,,
+60800 번째 학습,,,
+60900 번째 학습,,,
+61000 번째 학습,,,
+61100 번째 학습,,,
+61200 번째 학습,,,
+61300 번째 학습,,,
+61400 번째 학습,,,
+61500 번째 학습,,,
+61600 번째 학습,,,
+61700 번째 학습,,,
+61800 번째 학습,,,
+61900 번째 학습,,,
+62000 번째 학습,,,
+62100 번째 학습,,,
+62200 번째 학습,,,
+62300 번째 학습,,,
+62400 번째 학습,,,
+62500 번째 학습,,,
+62600 번째 학습,,,
+62700 번째 학습,,,
+62800 번째 학습,,,
+62900 번째 학습,,,
+63000 번째 학습,,,
+63100 번째 학습,,,
+63200 번째 학습,,,
+63300 번째 학습,,,
+63400 번째 학습,,,
+63500 번째 학습,,,
+63600 번째 학습,,,
+63700 번째 학습,,,
+63800 번째 학습,,,
+63900 번째 학습,,,
+64000 번째 학습,,,
+64100 번째 학습,,,
+64200 번째 학습,,,
+64300 번째 학습,,,
+64400 번째 학습,,,
+64500 번째 학습,,,
+64600 번째 학습,,,
+64700 번째 학습,,,
+64800 번째 학습,,,
+64900 번째 학습,,,
+65000 번째 학습,,,
+65100 번째 학습,,,
+65200 번째 학습,,,
+65300 번째 학습,,,
+65400 번째 학습,,,
+65500 번째 학습,,,
+65600 번째 학습,,,
+65700 번째 학습,,,
+65800 번째 학습,,,
+65900 번째 학습,,,
+66000 번째 학습,,,
+66100 번째 학습,,,
+66200 번째 학습,,,
+66300 번째 학습,,,
+66400 번째 학습,,,
+66500 번째 학습,,,
+66600 번째 학습,,,
+66700 번째 학습,,,
+66800 번째 학습,,,
+66900 번째 학습,,,
+67000 번째 학습,,,
+67100 번째 학습,,,
+67200 번째 학습,,,
+67300 번째 학습,,,
+67400 번째 학습,,,
+67500 번째 학습,,,
+67600 번째 학습,,,
+67700 번째 학습,,,
+67800 번째 학습,,,
+67900 번째 학습,,,
+68000 번째 학습,,,
+68100 번째 학습,,,
+68200 번째 학습,,,
+68300 번째 학습,,,
+68400 번째 학습,,,
+68500 번째 학습,,,
+68600 번째 학습,,,
+68700 번째 학습,,,
+68800 번째 학습,,,
+68900 번째 학습,,,
+69000 번째 학습,,,
+69100 번째 학습,,,
+69200 번째 학습,,,
+69300 번째 학습,,,
+69400 번째 학습,,,
+69500 번째 학습,,,
+69600 번째 학습,,,
+69700 번째 학습,,,
+69800 번째 학습,,,
+69900 번째 학습,,,
+70000 번째 학습,,,
+70100 번째 학습,,,
+70200 번째 학습,,,
+70300 번째 학습,,,
+70400 번째 학습,,,
+70500 번째 학습,,,
+70600 번째 학습,,,
+70700 번째 학습,,,
+70800 번째 학습,,,
+70900 번째 학습,,,
+71000 번째 학습,,,
+71100 번째 학습,,,
+71200 번째 학습,,,
+71300 번째 학습,,,
+71400 번째 학습,,,
+71500 번째 학습,,,
+71600 번째 학습,,,
+71700 번째 학습,,,
+71800 번째 학습,,,
+71900 번째 학습,,,
+72000 번째 학습,,,
+72100 번째 학습,,,
+72200 번째 학습,,,
+72300 번째 학습,,,
+72400 번째 학습,,,
+72500 번째 학습,,,
+72600 번째 학습,,,
+72700 번째 학습,,,
+72800 번째 학습,,,
+72900 번째 학습,,,
+73000 번째 학습,,,
+73100 번째 학습,,,
+73200 번째 학습,,,
+73300 번째 학습,,,
+73400 번째 학습,,,
+73500 번째 학습,,,
+73600 번째 학습,,,
+73700 번째 학습,,,
+73800 번째 학습,,,
+73900 번째 학습,,,
+74000 번째 학습,,,
+74100 번째 학습,,,
+74200 번째 학습,,,
+74300 번째 학습,,,
+74400 번째 학습,,,
+74500 번째 학습,,,
+74600 번째 학습,,,
+74700 번째 학습,,,
+74800 번째 학습,,,
+74900 번째 학습,,,
+75000 번째 학습,,,
+75100 번째 학습,,,
+75200 번째 학습,,,
+75300 번째 학습,,,
+75400 번째 학습,,,
+75500 번째 학습,,,
+75600 번째 학습,,,
+75700 번째 학습,,,
+75800 번째 학습,,,
+75900 번째 학습,,,
+76000 번째 학습,,,
+76100 번째 학습,,,
+76200 번째 학습,,,
+76300 번째 학습,,,
+76400 번째 학습,,,
+76500 번째 학습,,,
+76600 번째 학습,,,
+76700 번째 학습,,,
+76800 번째 학습,,,
+76900 번째 학습,,,
+77000 번째 학습,,,
+77100 번째 학습,,,
+77200 번째 학습,,,
+77300 번째 학습,,,
+77400 번째 학습,,,
+77500 번째 학습,,,
+77600 번째 학습,,,
+77700 번째 학습,,,
+77800 번째 학습,,,
+77900 번째 학습,,,
+78000 번째 학습,,,
+78100 번째 학습,,,
+78200 번째 학습,,,
+78300 번째 학습,,,
+78400 번째 학습,,,
+78500 번째 학습,,,
+78600 번째 학습,,,
+78700 번째 학습,,,
+78800 번째 학습,,,
+78900 번째 학습,,,
+79000 번째 학습,,,
+79100 번째 학습,,,
+79200 번째 학습,,,
+79300 번째 학습,,,
+79400 번째 학습,,,
+79500 번째 학습,,,
+79600 번째 학습,,,
+79700 번째 학습,,,
+79800 번째 학습,,,
+79900 번째 학습,,,
+80000 번째 학습,,,
+80100 번째 학습,,,
+80200 번째 학습,,,
+80300 번째 학습,,,
+80400 번째 학습,,,
+80500 번째 학습,,,
+80600 번째 학습,,,
+80700 번째 학습,,,
+80800 번째 학습,,,
+80900 번째 학습,,,
+81000 번째 학습,,,
+81100 번째 학습,,,
+81200 번째 학습,,,
+81300 번째 학습,,,
+81400 번째 학습,,,
+81500 번째 학습,,,
+81600 번째 학습,,,
+81700 번째 학습,,,
+81800 번째 학습,,,
+81900 번째 학습,,,
+82000 번째 학습,,,
+82100 번째 학습,,,
+82200 번째 학습,,,
+82300 번째 학습,,,
+82400 번째 학습,,,
+82500 번째 학습,,,
+82600 번째 학습,,,
+82700 번째 학습,,,
+82800 번째 학습,,,
+82900 번째 학습,,,
+83000 번째 학습,,,
+83100 번째 학습,,,
+83200 번째 학습,,,
+83300 번째 학습,,,
+83400 번째 학습,,,
+83500 번째 학습,,,
+83600 번째 학습,,,
+83700 번째 학습,,,
+83800 번째 학습,,,
+83900 번째 학습,,,
+84000 번째 학습,,,
+84100 번째 학습,,,
+84200 번째 학습,,,
+84300 번째 학습,,,
+84400 번째 학습,,,
+84500 번째 학습,,,
+84600 번째 학습,,,
+84700 번째 학습,,,
+84800 번째 학습,,,
+84900 번째 학습,,,
+85000 번째 학습,,,
+85100 번째 학습,,,
+85200 번째 학습,,,
+85300 번째 학습,,,
+85400 번째 학습,,,
+85500 번째 학습,,,
+85600 번째 학습,,,
+85700 번째 학습,,,
+85800 번째 학습,,,
+85900 번째 학습,,,
+86000 번째 학습,,,
+86100 번째 학습,,,
+86200 번째 학습,,,
+86300 번째 학습,,,
+86400 번째 학습,,,
+86500 번째 학습,,,
+86600 번째 학습,,,
+86700 번째 학습,,,
+86800 번째 학습,,,
+86900 번째 학습,,,
+87000 번째 학습,,,
+87100 번째 학습,,,
+87200 번째 학습,,,
+87300 번째 학습,,,
+87400 번째 학습,,,
+87500 번째 학습,,,
+87600 번째 학습,,,
+87700 번째 학습,,,
+87800 번째 학습,,,
+87900 번째 학습,,,
+88000 번째 학습,,,
+88100 번째 학습,,,
+88200 번째 학습,,,
+88300 번째 학습,,,
+88400 번째 학습,,,
+88500 번째 학습,,,
+88600 번째 학습,,,
+88700 번째 학습,,,
+88800 번째 학습,,,
+88900 번째 학습,,,
+89000 번째 학습,,,
+89100 번째 학습,,,
+89200 번째 학습,,,
+89300 번째 학습,,,
+89400 번째 학습,,,
+89500 번째 학습,,,
+89600 번째 학습,,,
+89700 번째 학습,,,
+89800 번째 학습,,,
+89900 번째 학습,,,
+90000 번째 학습,,,
+90100 번째 학습,,,
+90200 번째 학습,,,
+90300 번째 학습,,,
+90400 번째 학습,,,
+90500 번째 학습,,,
+90600 번째 학습,,,
+90700 번째 학습,,,
+90800 번째 학습,,,
+90900 번째 학습,,,
+91000 번째 학습,,,
+91100 번째 학습,,,
+91200 번째 학습,,,
+91300 번째 학습,,,
+91400 번째 학습,,,
+91500 번째 학습,,,
+91600 번째 학습,,,
+91700 번째 학습,,,
+91800 번째 학습,,,
+91900 번째 학습,,,
+92000 번째 학습,,,
+92100 번째 학습,,,
+92200 번째 학습,,,
+92300 번째 학습,,,
+92400 번째 학습,,,
+92500 번째 학습,,,
+92600 번째 학습,,,
+92700 번째 학습,,,
+92800 번째 학습,,,
+92900 번째 학습,,,
+93000 번째 학습,,,
+93100 번째 학습,,,
+93200 번째 학습,,,
+93300 번째 학습,,,
+93400 번째 학습,,,
+93500 번째 학습,,,
+93600 번째 학습,,,
+93700 번째 학습,,,
+93800 번째 학습,,,
+93900 번째 학습,,,
+94000 번째 학습,,,
+94100 번째 학습,,,
+94200 번째 학습,,,
+94300 번째 학습,,,
+94400 번째 학습,,,
+94500 번째 학습,,,
+94600 번째 학습,,,
+94700 번째 학습,,,
+94800 번째 학습,,,
+94900 번째 학습,,,
+95000 번째 학습,,,
+95100 번째 학습,,,
+95200 번째 학습,,,
+95300 번째 학습,,,
+95400 번째 학습,,,
+95500 번째 학습,,,
+95600 번째 학습,,,
+95700 번째 학습,,,
+95800 번째 학습,,,
+95900 번째 학습,,,
+96000 번째 학습,,,
+96100 번째 학습,,,
+96200 번째 학습,,,
+96300 번째 학습,,,
+96400 번째 학습,,,
+96500 번째 학습,,,
+96600 번째 학습,,,
+96700 번째 학습,,,
+96800 번째 학습,,,
+96900 번째 학습,,,
+97000 번째 학습,,,
+97100 번째 학습,,,
+97200 번째 학습,,,
+97300 번째 학습,,,
+97400 번째 학습,,,
+97500 번째 학습,,,
+97600 번째 학습,,,
+97700 번째 학습,,,
+97800 번째 학습,,,
+97900 번째 학습,,,
+98000 번째 학습,,,
+98100 번째 학습,,,
+98200 번째 학습,,,
+98300 번째 학습,,,
+98400 번째 학습,,,
+98500 번째 학습,,,
+98600 번째 학습,,,
+98700 번째 학습,,,
+98800 번째 학습,,,
+98900 번째 학습,,,
+99000 번째 학습,,,
+99100 번째 학습,,,
+99200 번째 학습,,,
+99300 번째 학습,,,
+99400 번째 학습,,,
+99500 번째 학습,,,
+99600 번째 학습,,,
+99700 번째 학습,,,
+99800 번째 학습,,,
+99900 번째 학습,,,
+100000 번째 학습,,,
+WorkingTime: 6170.037824869156 sec
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_accuracy: 78.67564534231201 \%
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{test\PYZus{}index} \PY{o}{=} \PY{l+m+mi}{892}
+        \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{test}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{probability} \PY{o}{=} \PY{n}{pred\PYZus{}probability}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+            \PY{k}{if} \PY{p}{(}\PY{n}{probability} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}index}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}index}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{test\PYZus{}index} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
